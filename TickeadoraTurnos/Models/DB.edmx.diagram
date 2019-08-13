@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4816d84cfb0d4e9ba9e7ce7f5acb5506" Name="Diagram1">
+        <EntityTypeShape EntityType="TransitoModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Audits" Width="1.5" PointX="3.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.CallCenterTurns" Width="1.5" PointX="3.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Countries" Width="1.5" PointX="1.5" PointY="39.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.LicenseClasses" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Licenses" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.MedicalPersons" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Modules" Width="1.5" PointX="1.5" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.People" Width="1.5" PointX="0.75" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Permissions" Width="1.5" PointX="3.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Processes" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.ProcessLogs" Width="1.5" PointX="5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Rols" Width="1.5" PointX="1.5" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Sectors" Width="1.5" PointX="9" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.SectorWorkflows" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Settings" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Status" Width="1.5" PointX="9" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Streets" Width="1.5" PointX="1.5" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Terminals" Width="1.5" PointX="9" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Trackings" Width="1.5" PointX="11.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Turns" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.TypesLicenses" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Usuarios" Width="1.5" PointX="1.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Windows" Width="1.5" PointX="1.5" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransitoModel.Workflows" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Audits_dbo_Usuarios_UsuarioId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Audits_dbo_Windows_WindowId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_People_dbo_Countries_CountryId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Licenses_dbo_People_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Licenses_dbo_Turns_TurnId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_MedicalPersons_dbo_People_PersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_MedicalPersons_dbo_Turns_TurnId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Windows_dbo_Modules_ModuleId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_People_dbo_Streets_StreetId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Turns_dbo_People_PersonID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Permissions_dbo_Rols_RolId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Permissions_dbo_Windows_WindowId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_ProcessLogs_dbo_Processes_ProcessId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Rols_dbo_Windows_Window_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Usuarios_dbo_Rols_RolId" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Terminals_dbo_Sectors_SectorID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Trackings_dbo_Sectors_SectorID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Trackings_dbo_Status_StatusID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Trackings_dbo_Terminals_TerminalID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Trackings_dbo_Turns_TurnID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Trackings_dbo_Usuarios_UsuarioID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID" ManuallyRouted="false" />
+        <AssociationConnector Association="TransitoModel.LicenseLicenseClasses" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

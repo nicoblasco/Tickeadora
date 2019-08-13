@@ -1,0 +1,2045 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TransitoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="WindowId" Type="int" Nullable="false" />
+          <Property Name="Accion" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Clave" Type="nvarchar(max)" />
+          <Property Name="Entidad" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CallCenterTurns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DNI" Type="nvarchar(max)" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Apellido" Type="nvarchar(max)" />
+          <Property Name="TipoTramite" Type="nvarchar(max)" />
+          <Property Name="FechaTurno" Type="datetime" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Asignado" Type="bit" Nullable="false" />
+          <Property Name="Gestion" Type="nvarchar(max)" />
+          <Property Name="Tel_Particular" Type="nvarchar(max)" />
+          <Property Name="Tel_Celular" Type="nvarchar(max)" />
+          <Property Name="Estado" Type="nvarchar(max)" />
+          <Property Name="Barrio" Type="nvarchar(max)" />
+          <Property Name="Vencimiento_licencia" Type="nvarchar(max)" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="UsuarioId" Type="int" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Predeterminado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LicenseClasses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar(max)" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LicenseLicenseClasses">
+          <Key>
+            <PropertyRef Name="LicenseClass_Id" />
+            <PropertyRef Name="License_Id" />
+          </Key>
+          <Property Name="LicenseClass_Id" Type="int" Nullable="false" />
+          <Property Name="License_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Licenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="FechaOtorgamiento" Type="datetime" />
+          <Property Name="FechaVencimiento" Type="datetime" />
+          <Property Name="TypesLicenseId" Type="int" />
+          <Property Name="Estado" Type="nvarchar(max)" />
+          <Property Name="FechaRecibo" Type="datetime" />
+          <Property Name="FechaRetiro" Type="datetime" />
+          <Property Name="Firma" Type="nvarchar(max)" />
+          <Property Name="TurnId" Type="int" />
+        </EntityType>
+        <EntityType Name="MedicalPersons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="TurnId" Type="int" Nullable="false" />
+          <Property Name="Avoi" Type="int" Nullable="false" />
+          <Property Name="Avod" Type="int" Nullable="false" />
+          <Property Name="Fuma" Type="bit" Nullable="false" />
+          <Property Name="Profesional" Type="bit" Nullable="false" />
+          <Property Name="ConduceConAnteojos" Type="bit" Nullable="false" />
+          <Property Name="VisionMonocular" Type="bit" Nullable="false" />
+          <Property Name="Discromatopsia" Type="bit" Nullable="false" />
+          <Property Name="HTA" Type="bit" Nullable="false" />
+          <Property Name="DBT" Type="bit" Nullable="false" />
+          <Property Name="GAA" Type="bit" Nullable="false" />
+          <Property Name="AcidoUrico" Type="bit" Nullable="false" />
+          <Property Name="Colesterol" Type="bit" Nullable="false" />
+          <Property Name="Observacion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Apellido" Type="nvarchar(max)" />
+          <Property Name="Dni" Type="nvarchar(max)" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="Tel_Particular" Type="nvarchar(max)" />
+          <Property Name="Tel_Celular" Type="nvarchar(max)" />
+          <Property Name="Barrio" Type="nvarchar(max)" />
+          <Property Name="Vencimiento_licencia" Type="datetime" />
+          <Property Name="Calle" Type="nvarchar(max)" />
+          <Property Name="StreetId" Type="int" />
+          <Property Name="Altura" Type="nvarchar(max)" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="CalleNro" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WindowId" Type="int" Nullable="false" />
+          <Property Name="RolId" Type="int" Nullable="false" />
+          <Property Name="Consulta" Type="bit" Nullable="false" />
+          <Property Name="AltaModificacion" Type="bit" Nullable="false" />
+          <Property Name="Baja" Type="bit" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Processes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" />
+          <Property Name="Detalle" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ProcessLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsOk" Type="bit" Nullable="false" />
+          <Property Name="ErrorDescripcion" Type="nvarchar(max)" />
+          <Property Name="ProcessId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rols">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="WindowId" Type="int" />
+        </EntityType>
+        <EntityType Name="Sectors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Medico" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SectorWorkflows">
+          <Key>
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="SectorID" />
+            <PropertyRef Name="WorkflowID" />
+          </Key>
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="SectorID" Type="int" Nullable="false" />
+          <Property Name="WorkflowID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clave" Type="nvarchar(max)" />
+          <Property Name="Texto1" Type="nvarchar(max)" />
+          <Property Name="Texto2" Type="nvarchar(max)" />
+          <Property Name="Numero1" Type="int" />
+          <Property Name="Numero2" Type="int" />
+          <Property Name="Logico1" Type="bit" />
+          <Property Name="Logico2" Type="bit" />
+          <Property Name="Fecha1" Type="datetime" />
+          <Property Name="Fecha2" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Baja" Type="nvarchar(max)" />
+          <Property Name="DescripcionOficial" Type="nvarchar(max)" />
+          <Property Name="Codigo" Type="nvarchar(max)" />
+          <Property Name="DescripcionGoogle" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Terminals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="IP" Type="nvarchar(max)" />
+          <Property Name="SectorID" Type="int" Nullable="false" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trackings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurnID" Type="int" Nullable="false" />
+          <Property Name="TerminalID" Type="int" />
+          <Property Name="SectorID" Type="int" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="FechaSalida" Type="datetime" />
+          <Property Name="Tiempo" Type="time" Precision="7" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="CantidadDeLlamados" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Alerta" Type="bit" Nullable="false" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Turns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Turno" Type="nvarchar(max)" />
+          <Property Name="TypesLicenseID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="FechaTurno" Type="datetime" Nullable="false" />
+          <Property Name="FechaSalida" Type="datetime" />
+          <Property Name="Tiempo" Type="time" Precision="7" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="CallCenterTurnId" Type="int" />
+        </EntityType>
+        <EntityType Name="TypesLicenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Codigo" Type="nvarchar(max)" />
+          <Property Name="Referencia" Type="nvarchar(max)" />
+          <Property Name="NumeroInicial" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" />
+          <Property Name="Apellido" Type="nvarchar(max)" />
+          <Property Name="Nombreusuario" Type="nvarchar(max)" />
+          <Property Name="Contraseña" Type="nvarchar(max)" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="RolId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Windows">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Orden" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Workflows">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypesLicenseID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Audits_dbo_Usuarios_UsuarioId">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Audits" Type="Self.Audits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Audits">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Audits_dbo_Windows_WindowId">
+          <End Role="Windows" Type="Self.Windows" Multiplicity="1" />
+          <End Role="Audits" Type="Self.Audits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Windows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Audits">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="CallCenterTurns" Type="Self.CallCenterTurns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="CallCenterTurns">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LicenseClassLicenses_dbo_LicenseClasses_LicenseClass_Id">
+          <End Role="LicenseClasses" Type="Self.LicenseClasses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LicenseLicenseClasses" Type="Self.LicenseLicenseClasses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicenseClasses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LicenseLicenseClasses">
+              <PropertyRef Name="LicenseClass_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LicenseClassLicenses_dbo_Licenses_License_Id">
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LicenseLicenseClasses" Type="Self.LicenseLicenseClasses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LicenseLicenseClasses">
+              <PropertyRef Name="License_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Licenses_dbo_People_PersonId">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Licenses_dbo_Turns_TurnId">
+          <End Role="Turns" Type="Self.Turns" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="TurnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId">
+          <End Role="TypesLicenses" Type="Self.TypesLicenses" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesLicenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="TypesLicenseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MedicalPersons_dbo_People_PersonId">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="MedicalPersons" Type="Self.MedicalPersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicalPersons">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MedicalPersons_dbo_Turns_TurnId">
+          <End Role="Turns" Type="Self.Turns" Multiplicity="1" />
+          <End Role="MedicalPersons" Type="Self.MedicalPersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicalPersons">
+              <PropertyRef Name="TurnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_People_dbo_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_People_dbo_Streets_StreetId">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="StreetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Permissions_dbo_Rols_RolId">
+          <End Role="Rols" Type="Self.Rols" Multiplicity="1" />
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rols">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Permissions">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Permissions_dbo_Windows_WindowId">
+          <End Role="Windows" Type="Self.Windows" Multiplicity="1" />
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Windows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permissions">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProcessLogs_dbo_Processes_ProcessId">
+          <End Role="Processes" Type="Self.Processes" Multiplicity="1" />
+          <End Role="ProcessLogs" Type="Self.ProcessLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessLogs">
+              <PropertyRef Name="ProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Rols_dbo_Windows_Window_Id">
+          <End Role="Windows" Type="Self.Windows" Multiplicity="0..1" />
+          <End Role="Rols" Type="Self.Rols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Windows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rols">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="SectorWorkflows" Type="Self.SectorWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorWorkflows">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1" />
+          <End Role="SectorWorkflows" Type="Self.SectorWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorWorkflows">
+              <PropertyRef Name="WorkflowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Terminals_dbo_Sectors_SectorID">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="Terminals" Type="Self.Terminals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Terminals">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Sectors_SectorID">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Status_StatusID">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Terminals_TerminalID">
+          <End Role="Terminals" Type="Self.Terminals" Multiplicity="0..1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="TerminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Turns_TurnID">
+          <End Role="Turns" Type="Self.Turns" Multiplicity="1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="TurnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Usuarios_UsuarioID">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId">
+          <End Role="CallCenterTurns" Type="Self.CallCenterTurns" Multiplicity="0..1" />
+          <End Role="Turns" Type="Self.Turns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallCenterTurns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turns">
+              <PropertyRef Name="CallCenterTurnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Turns_dbo_People_PersonID">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Turns" Type="Self.Turns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turns">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID">
+          <End Role="TypesLicenses" Type="Self.TypesLicenses" Multiplicity="1" />
+          <End Role="Turns" Type="Self.Turns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesLicenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turns">
+              <PropertyRef Name="TypesLicenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Usuarios_dbo_Rols_RolId">
+          <End Role="Rols" Type="Self.Rols" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rols">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Windows_dbo_Modules_ModuleId">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="Windows" Type="Self.Windows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Windows">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID">
+          <End Role="TypesLicenses" Type="Self.TypesLicenses" Multiplicity="1" />
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesLicenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workflows">
+              <PropertyRef Name="TypesLicenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TransitoModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audits" EntityType="Self.Audits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallCenterTurns" EntityType="Self.CallCenterTurns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseClasses" EntityType="Self.LicenseClasses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicenseLicenseClasses" EntityType="Self.LicenseLicenseClasses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalPersons" EntityType="Self.MedicalPersons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Processes" EntityType="Self.Processes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessLogs" EntityType="Self.ProcessLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rols" EntityType="Self.Rols" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SectorWorkflows" EntityType="Self.SectorWorkflows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Streets" EntityType="Self.Streets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terminals" EntityType="Self.Terminals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trackings" EntityType="Self.Trackings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turns" EntityType="Self.Turns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesLicenses" EntityType="Self.TypesLicenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Windows" EntityType="Self.Windows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflows" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Audits_dbo_Usuarios_UsuarioId" Association="Self.FK_dbo_Audits_dbo_Usuarios_UsuarioId">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Audits" EntitySet="Audits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Audits_dbo_Windows_WindowId" Association="Self.FK_dbo_Audits_dbo_Windows_WindowId">
+            <End Role="Windows" EntitySet="Windows" />
+            <End Role="Audits" EntitySet="Audits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId" Association="Self.FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CallCenterTurns" EntitySet="CallCenterTurns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LicenseClassLicenses_dbo_LicenseClasses_LicenseClass_Id" Association="Self.FK_dbo_LicenseClassLicenses_dbo_LicenseClasses_LicenseClass_Id">
+            <End Role="LicenseClasses" EntitySet="LicenseClasses" />
+            <End Role="LicenseLicenseClasses" EntitySet="LicenseLicenseClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LicenseClassLicenses_dbo_Licenses_License_Id" Association="Self.FK_dbo_LicenseClassLicenses_dbo_Licenses_License_Id">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="LicenseLicenseClasses" EntitySet="LicenseLicenseClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Licenses_dbo_People_PersonId" Association="Self.FK_dbo_Licenses_dbo_People_PersonId">
+            <End Role="People" EntitySet="People" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Licenses_dbo_Turns_TurnId" Association="Self.FK_dbo_Licenses_dbo_Turns_TurnId">
+            <End Role="Turns" EntitySet="Turns" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId" Association="Self.FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId">
+            <End Role="TypesLicenses" EntitySet="TypesLicenses" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MedicalPersons_dbo_People_PersonId" Association="Self.FK_dbo_MedicalPersons_dbo_People_PersonId">
+            <End Role="People" EntitySet="People" />
+            <End Role="MedicalPersons" EntitySet="MedicalPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MedicalPersons_dbo_Turns_TurnId" Association="Self.FK_dbo_MedicalPersons_dbo_Turns_TurnId">
+            <End Role="Turns" EntitySet="Turns" />
+            <End Role="MedicalPersons" EntitySet="MedicalPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_People_dbo_Countries_CountryId" Association="Self.FK_dbo_People_dbo_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_People_dbo_Streets_StreetId" Association="Self.FK_dbo_People_dbo_Streets_StreetId">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Permissions_dbo_Rols_RolId" Association="Self.FK_dbo_Permissions_dbo_Rols_RolId">
+            <End Role="Rols" EntitySet="Rols" />
+            <End Role="Permissions" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Permissions_dbo_Windows_WindowId" Association="Self.FK_dbo_Permissions_dbo_Windows_WindowId">
+            <End Role="Windows" EntitySet="Windows" />
+            <End Role="Permissions" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProcessLogs_dbo_Processes_ProcessId" Association="Self.FK_dbo_ProcessLogs_dbo_Processes_ProcessId">
+            <End Role="Processes" EntitySet="Processes" />
+            <End Role="ProcessLogs" EntitySet="ProcessLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Rols_dbo_Windows_Window_Id" Association="Self.FK_dbo_Rols_dbo_Windows_Window_Id">
+            <End Role="Windows" EntitySet="Windows" />
+            <End Role="Rols" EntitySet="Rols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id" Association="Self.FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="SectorWorkflows" EntitySet="SectorWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id" Association="Self.FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="SectorWorkflows" EntitySet="SectorWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Terminals_dbo_Sectors_SectorID" Association="Self.FK_dbo_Terminals_dbo_Sectors_SectorID">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="Terminals" EntitySet="Terminals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Sectors_SectorID" Association="Self.FK_dbo_Trackings_dbo_Sectors_SectorID">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Status_StatusID" Association="Self.FK_dbo_Trackings_dbo_Status_StatusID">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Terminals_TerminalID" Association="Self.FK_dbo_Trackings_dbo_Terminals_TerminalID">
+            <End Role="Terminals" EntitySet="Terminals" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Turns_TurnID" Association="Self.FK_dbo_Trackings_dbo_Turns_TurnID">
+            <End Role="Turns" EntitySet="Turns" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Usuarios_UsuarioID" Association="Self.FK_dbo_Trackings_dbo_Usuarios_UsuarioID">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId" Association="Self.FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId">
+            <End Role="CallCenterTurns" EntitySet="CallCenterTurns" />
+            <End Role="Turns" EntitySet="Turns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Turns_dbo_People_PersonID" Association="Self.FK_dbo_Turns_dbo_People_PersonID">
+            <End Role="People" EntitySet="People" />
+            <End Role="Turns" EntitySet="Turns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID" Association="Self.FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID">
+            <End Role="TypesLicenses" EntitySet="TypesLicenses" />
+            <End Role="Turns" EntitySet="Turns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Usuarios_dbo_Rols_RolId" Association="Self.FK_dbo_Usuarios_dbo_Rols_RolId">
+            <End Role="Rols" EntitySet="Rols" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Windows_dbo_Modules_ModuleId" Association="Self.FK_dbo_Windows_dbo_Modules_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Windows" EntitySet="Windows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID" Association="Self.FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID">
+            <End Role="TypesLicenses" EntitySet="TypesLicenses" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TransitoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="WindowId" Type="Int32" Nullable="false" />
+          <Property Name="Accion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Entidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_dbo_Audits_dbo_Usuarios_UsuarioId" FromRole="Audits" ToRole="Usuarios" />
+          <NavigationProperty Name="Windows" Relationship="Self.FK_dbo_Audits_dbo_Windows_WindowId" FromRole="Audits" ToRole="Windows" />
+        </EntityType>
+        <EntityType Name="CallCenterTurns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DNI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TipoTramite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaTurno" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Asignado" Type="Boolean" Nullable="false" />
+          <Property Name="Gestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tel_Particular" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tel_Celular" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Barrio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vencimiento_licencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId" FromRole="CallCenterTurns" ToRole="Usuarios" />
+          <NavigationProperty Name="Turns" Relationship="Self.FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId" FromRole="CallCenterTurns" ToRole="Turns" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Predeterminado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="People" Relationship="Self.FK_dbo_People_dbo_Countries_CountryId" FromRole="Countries" ToRole="People" />
+        </EntityType>
+        <EntityType Name="LicenseClasses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Licenses" Relationship="Self.LicenseLicenseClasses" FromRole="LicenseClasses" ToRole="Licenses" />
+        </EntityType>
+        <EntityType Name="Licenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="FechaOtorgamiento" Type="DateTime" Precision="3" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="3" />
+          <Property Name="TypesLicenseId" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRecibo" Type="DateTime" Precision="3" />
+          <Property Name="FechaRetiro" Type="DateTime" Precision="3" />
+          <Property Name="Firma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TurnId" Type="Int32" />
+          <NavigationProperty Name="People" Relationship="Self.FK_dbo_Licenses_dbo_People_PersonId" FromRole="Licenses" ToRole="People" />
+          <NavigationProperty Name="Turns" Relationship="Self.FK_dbo_Licenses_dbo_Turns_TurnId" FromRole="Licenses" ToRole="Turns" />
+          <NavigationProperty Name="TypesLicenses" Relationship="Self.FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId" FromRole="Licenses" ToRole="TypesLicenses" />
+          <NavigationProperty Name="LicenseClasses" Relationship="Self.LicenseLicenseClasses" FromRole="Licenses" ToRole="LicenseClasses" />
+        </EntityType>
+        <EntityType Name="MedicalPersons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="TurnId" Type="Int32" Nullable="false" />
+          <Property Name="Avoi" Type="Int32" Nullable="false" />
+          <Property Name="Avod" Type="Int32" Nullable="false" />
+          <Property Name="Fuma" Type="Boolean" Nullable="false" />
+          <Property Name="Profesional" Type="Boolean" Nullable="false" />
+          <Property Name="ConduceConAnteojos" Type="Boolean" Nullable="false" />
+          <Property Name="VisionMonocular" Type="Boolean" Nullable="false" />
+          <Property Name="Discromatopsia" Type="Boolean" Nullable="false" />
+          <Property Name="HTA" Type="Boolean" Nullable="false" />
+          <Property Name="DBT" Type="Boolean" Nullable="false" />
+          <Property Name="GAA" Type="Boolean" Nullable="false" />
+          <Property Name="AcidoUrico" Type="Boolean" Nullable="false" />
+          <Property Name="Colesterol" Type="Boolean" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="People" Relationship="Self.FK_dbo_MedicalPersons_dbo_People_PersonId" FromRole="MedicalPersons" ToRole="People" />
+          <NavigationProperty Name="Turns" Relationship="Self.FK_dbo_MedicalPersons_dbo_Turns_TurnId" FromRole="MedicalPersons" ToRole="Turns" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Windows" Relationship="Self.FK_dbo_Windows_dbo_Modules_ModuleId" FromRole="Modules" ToRole="Windows" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dni" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Tel_Particular" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tel_Celular" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Barrio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vencimiento_licencia" Type="DateTime" Precision="3" />
+          <Property Name="Calle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StreetId" Type="Int32" />
+          <Property Name="Altura" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="CalleNro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_dbo_People_dbo_Countries_CountryId" FromRole="People" ToRole="Countries" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_dbo_Licenses_dbo_People_PersonId" FromRole="People" ToRole="Licenses" />
+          <NavigationProperty Name="MedicalPersons" Relationship="Self.FK_dbo_MedicalPersons_dbo_People_PersonId" FromRole="People" ToRole="MedicalPersons" />
+          <NavigationProperty Name="Streets" Relationship="Self.FK_dbo_People_dbo_Streets_StreetId" FromRole="People" ToRole="Streets" />
+          <NavigationProperty Name="Turns" Relationship="Self.FK_dbo_Turns_dbo_People_PersonID" FromRole="People" ToRole="Turns" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WindowId" Type="Int32" Nullable="false" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+          <Property Name="Consulta" Type="Boolean" Nullable="false" />
+          <Property Name="AltaModificacion" Type="Boolean" Nullable="false" />
+          <Property Name="Baja" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Rols" Relationship="Self.FK_dbo_Permissions_dbo_Rols_RolId" FromRole="Permissions" ToRole="Rols" />
+          <NavigationProperty Name="Windows" Relationship="Self.FK_dbo_Permissions_dbo_Windows_WindowId" FromRole="Permissions" ToRole="Windows" />
+        </EntityType>
+        <EntityType Name="Processes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="Detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProcessLogs" Relationship="Self.FK_dbo_ProcessLogs_dbo_Processes_ProcessId" FromRole="Processes" ToRole="ProcessLogs" />
+        </EntityType>
+        <EntityType Name="ProcessLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsOk" Type="Boolean" Nullable="false" />
+          <Property Name="ErrorDescripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Processes" Relationship="Self.FK_dbo_ProcessLogs_dbo_Processes_ProcessId" FromRole="ProcessLogs" ToRole="Processes" />
+        </EntityType>
+        <EntityType Name="Rols">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="WindowId" Type="Int32" />
+          <NavigationProperty Name="Permissions" Relationship="Self.FK_dbo_Permissions_dbo_Rols_RolId" FromRole="Rols" ToRole="Permissions" />
+          <NavigationProperty Name="Windows" Relationship="Self.FK_dbo_Rols_dbo_Windows_Window_Id" FromRole="Rols" ToRole="Windows" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_dbo_Usuarios_dbo_Rols_RolId" FromRole="Rols" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Sectors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Medico" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SectorWorkflows" Relationship="Self.FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id" FromRole="Sectors" ToRole="SectorWorkflows" />
+          <NavigationProperty Name="Terminals" Relationship="Self.FK_dbo_Terminals_dbo_Sectors_SectorID" FromRole="Sectors" ToRole="Terminals" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_dbo_Trackings_dbo_Sectors_SectorID" FromRole="Sectors" ToRole="Trackings" />
+        </EntityType>
+        <EntityType Name="SectorWorkflows">
+          <Key>
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="SectorID" />
+            <PropertyRef Name="WorkflowID" />
+          </Key>
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="SectorID" Type="Int32" Nullable="false" />
+          <Property Name="WorkflowID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sectors" Relationship="Self.FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id" FromRole="SectorWorkflows" ToRole="Sectors" />
+          <NavigationProperty Name="Workflows" Relationship="Self.FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id" FromRole="SectorWorkflows" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Texto1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Texto2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Numero1" Type="Int32" />
+          <Property Name="Numero2" Type="Int32" />
+          <Property Name="Logico1" Type="Boolean" />
+          <Property Name="Logico2" Type="Boolean" />
+          <Property Name="Fecha1" Type="DateTime" Precision="3" />
+          <Property Name="Fecha2" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_dbo_Trackings_dbo_Status_StatusID" FromRole="Status" ToRole="Trackings" />
+        </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Baja" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionOficial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Codigo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionGoogle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="People" Relationship="Self.FK_dbo_People_dbo_Streets_StreetId" FromRole="Streets" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Terminals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SectorID" Type="Int32" Nullable="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sectors" Relationship="Self.FK_dbo_Terminals_dbo_Sectors_SectorID" FromRole="Terminals" ToRole="Sectors" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_dbo_Trackings_dbo_Terminals_TerminalID" FromRole="Terminals" ToRole="Trackings" />
+        </EntityType>
+        <EntityType Name="Trackings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurnID" Type="Int32" Nullable="false" />
+          <Property Name="TerminalID" Type="Int32" />
+          <Property Name="SectorID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="FechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="Tiempo" Type="Time" Precision="7" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CantidadDeLlamados" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Alerta" Type="Boolean" Nullable="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sectors" Relationship="Self.FK_dbo_Trackings_dbo_Sectors_SectorID" FromRole="Trackings" ToRole="Sectors" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_dbo_Trackings_dbo_Status_StatusID" FromRole="Trackings" ToRole="Status" />
+          <NavigationProperty Name="Terminals" Relationship="Self.FK_dbo_Trackings_dbo_Terminals_TerminalID" FromRole="Trackings" ToRole="Terminals" />
+          <NavigationProperty Name="Turns" Relationship="Self.FK_dbo_Trackings_dbo_Turns_TurnID" FromRole="Trackings" ToRole="Turns" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_dbo_Trackings_dbo_Usuarios_UsuarioID" FromRole="Trackings" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Turns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Turno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypesLicenseID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="FechaTurno" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="Tiempo" Type="Time" Precision="7" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="CallCenterTurnId" Type="Int32" />
+          <NavigationProperty Name="CallCenterTurns" Relationship="Self.FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId" FromRole="Turns" ToRole="CallCenterTurns" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_dbo_Licenses_dbo_Turns_TurnId" FromRole="Turns" ToRole="Licenses" />
+          <NavigationProperty Name="MedicalPersons" Relationship="Self.FK_dbo_MedicalPersons_dbo_Turns_TurnId" FromRole="Turns" ToRole="MedicalPersons" />
+          <NavigationProperty Name="People" Relationship="Self.FK_dbo_Turns_dbo_People_PersonID" FromRole="Turns" ToRole="People" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_dbo_Trackings_dbo_Turns_TurnID" FromRole="Turns" ToRole="Trackings" />
+          <NavigationProperty Name="TypesLicenses" Relationship="Self.FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID" FromRole="Turns" ToRole="TypesLicenses" />
+        </EntityType>
+        <EntityType Name="TypesLicenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Codigo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroInicial" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId" FromRole="TypesLicenses" ToRole="Licenses" />
+          <NavigationProperty Name="Turns" Relationship="Self.FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID" FromRole="TypesLicenses" ToRole="Turns" />
+          <NavigationProperty Name="Workflows" Relationship="Self.FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID" FromRole="TypesLicenses" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nombreusuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contraseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Audits" Relationship="Self.FK_dbo_Audits_dbo_Usuarios_UsuarioId" FromRole="Usuarios" ToRole="Audits" />
+          <NavigationProperty Name="CallCenterTurns" Relationship="Self.FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId" FromRole="Usuarios" ToRole="CallCenterTurns" />
+          <NavigationProperty Name="Rols" Relationship="Self.FK_dbo_Usuarios_dbo_Rols_RolId" FromRole="Usuarios" ToRole="Rols" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK_dbo_Trackings_dbo_Usuarios_UsuarioID" FromRole="Usuarios" ToRole="Trackings" />
+        </EntityType>
+        <EntityType Name="Windows">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Orden" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Audits" Relationship="Self.FK_dbo_Audits_dbo_Windows_WindowId" FromRole="Windows" ToRole="Audits" />
+          <NavigationProperty Name="Modules" Relationship="Self.FK_dbo_Windows_dbo_Modules_ModuleId" FromRole="Windows" ToRole="Modules" />
+          <NavigationProperty Name="Permissions" Relationship="Self.FK_dbo_Permissions_dbo_Windows_WindowId" FromRole="Windows" ToRole="Permissions" />
+          <NavigationProperty Name="Rols" Relationship="Self.FK_dbo_Rols_dbo_Windows_Window_Id" FromRole="Windows" ToRole="Rols" />
+        </EntityType>
+        <EntityType Name="Workflows">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypesLicenseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SectorWorkflows" Relationship="Self.FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id" FromRole="Workflows" ToRole="SectorWorkflows" />
+          <NavigationProperty Name="TypesLicenses" Relationship="Self.FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID" FromRole="Workflows" ToRole="TypesLicenses" />
+        </EntityType>
+        <Association Name="FK_dbo_Audits_dbo_Usuarios_UsuarioId">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Audits" Type="Self.Audits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Audits">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Audits_dbo_Windows_WindowId">
+          <End Role="Windows" Type="Self.Windows" Multiplicity="1" />
+          <End Role="Audits" Type="Self.Audits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Windows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Audits">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="CallCenterTurns" Type="Self.CallCenterTurns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="CallCenterTurns">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId">
+          <End Role="CallCenterTurns" Type="Self.CallCenterTurns" Multiplicity="0..1" />
+          <End Role="Turns" Type="Self.Turns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CallCenterTurns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turns">
+              <PropertyRef Name="CallCenterTurnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_People_dbo_Countries_CountryId">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Licenses_dbo_People_PersonId">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Licenses_dbo_Turns_TurnId">
+          <End Role="Turns" Type="Self.Turns" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="TurnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId">
+          <End Role="TypesLicenses" Type="Self.TypesLicenses" Multiplicity="0..1" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesLicenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Licenses">
+              <PropertyRef Name="TypesLicenseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MedicalPersons_dbo_People_PersonId">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="MedicalPersons" Type="Self.MedicalPersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicalPersons">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MedicalPersons_dbo_Turns_TurnId">
+          <End Role="Turns" Type="Self.Turns" Multiplicity="1" />
+          <End Role="MedicalPersons" Type="Self.MedicalPersons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicalPersons">
+              <PropertyRef Name="TurnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Windows_dbo_Modules_ModuleId">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="Windows" Type="Self.Windows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Windows">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_People_dbo_Streets_StreetId">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="StreetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Turns_dbo_People_PersonID">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Turns" Type="Self.Turns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turns">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Permissions_dbo_Rols_RolId">
+          <End Role="Rols" Type="Self.Rols" Multiplicity="1" />
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rols">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Permissions">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Permissions_dbo_Windows_WindowId">
+          <End Role="Windows" Type="Self.Windows" Multiplicity="1" />
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Windows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permissions">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ProcessLogs_dbo_Processes_ProcessId">
+          <End Role="Processes" Type="Self.Processes" Multiplicity="1" />
+          <End Role="ProcessLogs" Type="Self.ProcessLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessLogs">
+              <PropertyRef Name="ProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Rols_dbo_Windows_Window_Id">
+          <End Role="Windows" Type="Self.Windows" Multiplicity="0..1" />
+          <End Role="Rols" Type="Self.Rols" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Windows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rols">
+              <PropertyRef Name="WindowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Usuarios_dbo_Rols_RolId">
+          <End Role="Rols" Type="Self.Rols" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rols">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="SectorWorkflows" Type="Self.SectorWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorWorkflows">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Terminals_dbo_Sectors_SectorID">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="Terminals" Type="Self.Terminals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Terminals">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Sectors_SectorID">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1" />
+          <End Role="SectorWorkflows" Type="Self.SectorWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SectorWorkflows">
+              <PropertyRef Name="WorkflowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Status_StatusID">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Terminals_TerminalID">
+          <End Role="Terminals" Type="Self.Terminals" Multiplicity="0..1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="TerminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Turns_TurnID">
+          <End Role="Turns" Type="Self.Turns" Multiplicity="1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="TurnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trackings_dbo_Usuarios_UsuarioID">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Trackings" Type="Self.Trackings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Trackings">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID">
+          <End Role="TypesLicenses" Type="Self.TypesLicenses" Multiplicity="1" />
+          <End Role="Turns" Type="Self.Turns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesLicenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Turns">
+              <PropertyRef Name="TypesLicenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID">
+          <End Role="TypesLicenses" Type="Self.TypesLicenses" Multiplicity="1" />
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesLicenses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workflows">
+              <PropertyRef Name="TypesLicenseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LicenseLicenseClasses">
+          <End Role="LicenseClasses" Type="Self.LicenseClasses" Multiplicity="*" />
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TransitoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Audits" EntityType="Self.Audits" />
+          <EntitySet Name="CallCenterTurns" EntityType="Self.CallCenterTurns" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="LicenseClasses" EntityType="Self.LicenseClasses" />
+          <EntitySet Name="Licenses" EntityType="Self.Licenses" />
+          <EntitySet Name="MedicalPersons" EntityType="Self.MedicalPersons" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" />
+          <EntitySet Name="People" EntityType="Self.People" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" />
+          <EntitySet Name="Processes" EntityType="Self.Processes" />
+          <EntitySet Name="ProcessLogs" EntityType="Self.ProcessLogs" />
+          <EntitySet Name="Rols" EntityType="Self.Rols" />
+          <EntitySet Name="Sectors" EntityType="Self.Sectors" />
+          <EntitySet Name="SectorWorkflows" EntityType="Self.SectorWorkflows" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Streets" EntityType="Self.Streets" />
+          <EntitySet Name="Terminals" EntityType="Self.Terminals" />
+          <EntitySet Name="Trackings" EntityType="Self.Trackings" />
+          <EntitySet Name="Turns" EntityType="Self.Turns" />
+          <EntitySet Name="TypesLicenses" EntityType="Self.TypesLicenses" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Windows" EntityType="Self.Windows" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflows" />
+          <AssociationSet Name="FK_dbo_Audits_dbo_Usuarios_UsuarioId" Association="Self.FK_dbo_Audits_dbo_Usuarios_UsuarioId">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Audits" EntitySet="Audits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Audits_dbo_Windows_WindowId" Association="Self.FK_dbo_Audits_dbo_Windows_WindowId">
+            <End Role="Windows" EntitySet="Windows" />
+            <End Role="Audits" EntitySet="Audits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId" Association="Self.FK_dbo_CallCenterTurns_dbo_Usuarios_UsuarioId">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CallCenterTurns" EntitySet="CallCenterTurns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId" Association="Self.FK_dbo_Turns_dbo_CallCenterTurns_CallCenterTurnId">
+            <End Role="CallCenterTurns" EntitySet="CallCenterTurns" />
+            <End Role="Turns" EntitySet="Turns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_People_dbo_Countries_CountryId" Association="Self.FK_dbo_People_dbo_Countries_CountryId">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Licenses_dbo_People_PersonId" Association="Self.FK_dbo_Licenses_dbo_People_PersonId">
+            <End Role="People" EntitySet="People" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Licenses_dbo_Turns_TurnId" Association="Self.FK_dbo_Licenses_dbo_Turns_TurnId">
+            <End Role="Turns" EntitySet="Turns" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId" Association="Self.FK_dbo_Licenses_dbo_TypesLicenses_TypesLicenseId">
+            <End Role="TypesLicenses" EntitySet="TypesLicenses" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MedicalPersons_dbo_People_PersonId" Association="Self.FK_dbo_MedicalPersons_dbo_People_PersonId">
+            <End Role="People" EntitySet="People" />
+            <End Role="MedicalPersons" EntitySet="MedicalPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MedicalPersons_dbo_Turns_TurnId" Association="Self.FK_dbo_MedicalPersons_dbo_Turns_TurnId">
+            <End Role="Turns" EntitySet="Turns" />
+            <End Role="MedicalPersons" EntitySet="MedicalPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Windows_dbo_Modules_ModuleId" Association="Self.FK_dbo_Windows_dbo_Modules_ModuleId">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Windows" EntitySet="Windows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_People_dbo_Streets_StreetId" Association="Self.FK_dbo_People_dbo_Streets_StreetId">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Turns_dbo_People_PersonID" Association="Self.FK_dbo_Turns_dbo_People_PersonID">
+            <End Role="People" EntitySet="People" />
+            <End Role="Turns" EntitySet="Turns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Permissions_dbo_Rols_RolId" Association="Self.FK_dbo_Permissions_dbo_Rols_RolId">
+            <End Role="Rols" EntitySet="Rols" />
+            <End Role="Permissions" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Permissions_dbo_Windows_WindowId" Association="Self.FK_dbo_Permissions_dbo_Windows_WindowId">
+            <End Role="Windows" EntitySet="Windows" />
+            <End Role="Permissions" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ProcessLogs_dbo_Processes_ProcessId" Association="Self.FK_dbo_ProcessLogs_dbo_Processes_ProcessId">
+            <End Role="Processes" EntitySet="Processes" />
+            <End Role="ProcessLogs" EntitySet="ProcessLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Rols_dbo_Windows_Window_Id" Association="Self.FK_dbo_Rols_dbo_Windows_Window_Id">
+            <End Role="Windows" EntitySet="Windows" />
+            <End Role="Rols" EntitySet="Rols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Usuarios_dbo_Rols_RolId" Association="Self.FK_dbo_Usuarios_dbo_Rols_RolId">
+            <End Role="Rols" EntitySet="Rols" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id" Association="Self.FK_dbo_SectorWorkflows_dbo_Sectors_Sector_Id">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="SectorWorkflows" EntitySet="SectorWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Terminals_dbo_Sectors_SectorID" Association="Self.FK_dbo_Terminals_dbo_Sectors_SectorID">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="Terminals" EntitySet="Terminals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Sectors_SectorID" Association="Self.FK_dbo_Trackings_dbo_Sectors_SectorID">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id" Association="Self.FK_dbo_SectorWorkflows_dbo_Workflows_Workflow_Id">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="SectorWorkflows" EntitySet="SectorWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Status_StatusID" Association="Self.FK_dbo_Trackings_dbo_Status_StatusID">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Terminals_TerminalID" Association="Self.FK_dbo_Trackings_dbo_Terminals_TerminalID">
+            <End Role="Terminals" EntitySet="Terminals" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Turns_TurnID" Association="Self.FK_dbo_Trackings_dbo_Turns_TurnID">
+            <End Role="Turns" EntitySet="Turns" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trackings_dbo_Usuarios_UsuarioID" Association="Self.FK_dbo_Trackings_dbo_Usuarios_UsuarioID">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Trackings" EntitySet="Trackings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID" Association="Self.FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID">
+            <End Role="TypesLicenses" EntitySet="TypesLicenses" />
+            <End Role="Turns" EntitySet="Turns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID" Association="Self.FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID">
+            <End Role="TypesLicenses" EntitySet="TypesLicenses" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+          <AssociationSet Name="LicenseLicenseClasses" Association="Self.LicenseLicenseClasses">
+            <End Role="LicenseClasses" EntitySet="LicenseClasses" />
+            <End Role="Licenses" EntitySet="Licenses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TransitoModelStoreContainer" CdmEntityContainer="TransitoEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="TransitoModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audits">
+            <EntityTypeMapping TypeName="TransitoModel.Audits">
+              <MappingFragment StoreEntitySet="Audits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="WindowId" ColumnName="WindowId" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Entidad" ColumnName="Entidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallCenterTurns">
+            <EntityTypeMapping TypeName="TransitoModel.CallCenterTurns">
+              <MappingFragment StoreEntitySet="CallCenterTurns">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="TipoTramite" ColumnName="TipoTramite" />
+                <ScalarProperty Name="FechaTurno" ColumnName="FechaTurno" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Asignado" ColumnName="Asignado" />
+                <ScalarProperty Name="Gestion" ColumnName="Gestion" />
+                <ScalarProperty Name="Tel_Particular" ColumnName="Tel_Particular" />
+                <ScalarProperty Name="Tel_Celular" ColumnName="Tel_Celular" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Vencimiento_licencia" ColumnName="Vencimiento_licencia" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="TransitoModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Predeterminado" ColumnName="Predeterminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicenseClasses">
+            <EntityTypeMapping TypeName="TransitoModel.LicenseClasses">
+              <MappingFragment StoreEntitySet="LicenseClasses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="TransitoModel.Licenses">
+              <MappingFragment StoreEntitySet="Licenses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="FechaOtorgamiento" ColumnName="FechaOtorgamiento" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="TypesLicenseId" ColumnName="TypesLicenseId" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaRecibo" ColumnName="FechaRecibo" />
+                <ScalarProperty Name="FechaRetiro" ColumnName="FechaRetiro" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="TurnId" ColumnName="TurnId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalPersons">
+            <EntityTypeMapping TypeName="TransitoModel.MedicalPersons">
+              <MappingFragment StoreEntitySet="MedicalPersons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="TurnId" ColumnName="TurnId" />
+                <ScalarProperty Name="Avoi" ColumnName="Avoi" />
+                <ScalarProperty Name="Avod" ColumnName="Avod" />
+                <ScalarProperty Name="Fuma" ColumnName="Fuma" />
+                <ScalarProperty Name="Profesional" ColumnName="Profesional" />
+                <ScalarProperty Name="ConduceConAnteojos" ColumnName="ConduceConAnteojos" />
+                <ScalarProperty Name="VisionMonocular" ColumnName="VisionMonocular" />
+                <ScalarProperty Name="Discromatopsia" ColumnName="Discromatopsia" />
+                <ScalarProperty Name="HTA" ColumnName="HTA" />
+                <ScalarProperty Name="DBT" ColumnName="DBT" />
+                <ScalarProperty Name="GAA" ColumnName="GAA" />
+                <ScalarProperty Name="AcidoUrico" ColumnName="AcidoUrico" />
+                <ScalarProperty Name="Colesterol" ColumnName="Colesterol" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="TransitoModel.Modules">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="TransitoModel.People">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Dni" ColumnName="Dni" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Tel_Particular" ColumnName="Tel_Particular" />
+                <ScalarProperty Name="Tel_Celular" ColumnName="Tel_Celular" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Vencimiento_licencia" ColumnName="Vencimiento_licencia" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="StreetId" ColumnName="StreetId" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CalleNro" ColumnName="CalleNro" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="TransitoModel.Permissions">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WindowId" ColumnName="WindowId" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="Consulta" ColumnName="Consulta" />
+                <ScalarProperty Name="AltaModificacion" ColumnName="AltaModificacion" />
+                <ScalarProperty Name="Baja" ColumnName="Baja" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Processes">
+            <EntityTypeMapping TypeName="TransitoModel.Processes">
+              <MappingFragment StoreEntitySet="Processes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessLogs">
+            <EntityTypeMapping TypeName="TransitoModel.ProcessLogs">
+              <MappingFragment StoreEntitySet="ProcessLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsOk" ColumnName="IsOk" />
+                <ScalarProperty Name="ErrorDescripcion" ColumnName="ErrorDescripcion" />
+                <ScalarProperty Name="ProcessId" ColumnName="ProcessId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rols">
+            <EntityTypeMapping TypeName="TransitoModel.Rols">
+              <MappingFragment StoreEntitySet="Rols">
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="WindowId" ColumnName="WindowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectors">
+            <EntityTypeMapping TypeName="TransitoModel.Sectors">
+              <MappingFragment StoreEntitySet="Sectors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Medico" ColumnName="Medico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SectorWorkflows">
+            <EntityTypeMapping TypeName="TransitoModel.SectorWorkflows">
+              <MappingFragment StoreEntitySet="SectorWorkflows">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="WorkflowID" ColumnName="WorkflowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="TransitoModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Texto1" ColumnName="Texto1" />
+                <ScalarProperty Name="Texto2" ColumnName="Texto2" />
+                <ScalarProperty Name="Numero1" ColumnName="Numero1" />
+                <ScalarProperty Name="Numero2" ColumnName="Numero2" />
+                <ScalarProperty Name="Logico1" ColumnName="Logico1" />
+                <ScalarProperty Name="Logico2" ColumnName="Logico2" />
+                <ScalarProperty Name="Fecha1" ColumnName="Fecha1" />
+                <ScalarProperty Name="Fecha2" ColumnName="Fecha2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="TransitoModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Streets">
+            <EntityTypeMapping TypeName="TransitoModel.Streets">
+              <MappingFragment StoreEntitySet="Streets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Baja" ColumnName="Baja" />
+                <ScalarProperty Name="DescripcionOficial" ColumnName="DescripcionOficial" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="DescripcionGoogle" ColumnName="DescripcionGoogle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terminals">
+            <EntityTypeMapping TypeName="TransitoModel.Terminals">
+              <MappingFragment StoreEntitySet="Terminals">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trackings">
+            <EntityTypeMapping TypeName="TransitoModel.Trackings">
+              <MappingFragment StoreEntitySet="Trackings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TurnID" ColumnName="TurnID" />
+                <ScalarProperty Name="TerminalID" ColumnName="TerminalID" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="CantidadDeLlamados" ColumnName="CantidadDeLlamados" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Alerta" ColumnName="Alerta" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turns">
+            <EntityTypeMapping TypeName="TransitoModel.Turns">
+              <MappingFragment StoreEntitySet="Turns">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="TypesLicenseID" ColumnName="TypesLicenseID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="FechaTurno" ColumnName="FechaTurno" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="CallCenterTurnId" ColumnName="CallCenterTurnId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesLicenses">
+            <EntityTypeMapping TypeName="TransitoModel.TypesLicenses">
+              <MappingFragment StoreEntitySet="TypesLicenses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="NumeroInicial" ColumnName="NumeroInicial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="TransitoModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombreusuario" ColumnName="Nombreusuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Windows">
+            <EntityTypeMapping TypeName="TransitoModel.Windows">
+              <MappingFragment StoreEntitySet="Windows">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="TransitoModel.Workflows">
+              <MappingFragment StoreEntitySet="Workflows">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypesLicenseID" ColumnName="TypesLicenseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LicenseLicenseClasses" TypeName="TransitoModel.LicenseLicenseClasses" StoreEntitySet="LicenseLicenseClasses">
+            <EndProperty Name="LicenseClasses">
+              <ScalarProperty Name="Id" ColumnName="LicenseClass_Id" />
+            </EndProperty>
+            <EndProperty Name="Licenses">
+              <ScalarProperty Name="Id" ColumnName="License_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
