@@ -17,6 +17,10 @@ namespace TickeadoraTurnos
     public partial class frmIndex : Form
     {
         TransitoEntities db = new TransitoEntities();
+        private const string CONST_IMPRESORA = "IMPRESORA";
+        private const string CONST_ANTEULTIMALINEA = "ANTEULTIMALINEA";
+        private const string CONST_ULTIMALINEA = "ULTIMALINEA";
+        private const string CONST_IMAGEN = "IMAGEN";
         string strImpresora;
         public frmIndex()
         {
@@ -210,9 +214,19 @@ namespace TickeadoraTurnos
 
         private void Imprimir(Turns turn)
         {
+            List<Settings> settings = db.Settings.ToList();
+
+           
+            string strAnteultimaLinea = settings.Where(x => x.Clave == CONST_ANTEULTIMALINEA).FirstOrDefault().Texto1;
+            string strUltimaLinea = settings.Where(x => x.Clave == CONST_ULTIMALINEA).FirstOrDefault().Texto1;
+            bool? boImagen = settings.Where(x => x.Clave == CONST_IMAGEN).FirstOrDefault().Logico1;
+
             Tickets ticket = new Tickets();
-            var bmp = new Bitmap(TickeadoraTurnos.Properties.Resources.Fondo_color);
-             ticket.HeaderImage = bmp;
+            if (boImagen.Value) {
+                var bmp = new Bitmap(TickeadoraTurnos.Properties.Resources.Fondo_color);
+                ticket.HeaderImage = bmp;
+            }
+
             ticket.AddHeaderLine("──────────────────────────────────");
             ticket.AddHeaderLine  ("TURNO: " + turn.Turno);                      
             ticket.AddHeaderLine("──────────────────────────────────");
@@ -225,8 +239,13 @@ namespace TickeadoraTurnos
             ticket.AddContentLine("");
             ticket.AddContentLine("");
             ticket.AddContentLine("");
-            ticket.AddFooterLine("Dirección de Transito");
-            ticket.AddFooterLine("Municipalidad de Florencio Varela");
+            if (!String.IsNullOrEmpty (strAnteultimaLinea))
+                ticket.AddFooterLine(strAnteultimaLinea);
+            if (!String.IsNullOrEmpty(strUltimaLinea))
+                ticket.AddFooterLine(strUltimaLinea);
+
+            //ticket.AddFooterLine("Dirección de Transito");
+            //ticket.AddFooterLine("Municipalidad de Florencio Varela");
 
             //if (!string.IsNullOrEmpty(objDatosImpresion.StrComercio))
             //    ticket.AddHeaderLine(objDatosImpresion.StrComercio);//Nombre del comercio
