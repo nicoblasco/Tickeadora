@@ -84,6 +84,7 @@ namespace TickeadoraTurnos
                     Turns turnoold = db.Turns.Where(x => x.CallCenterTurnId == callCenterTurn.Id).FirstOrDefault();
                     //Reeimprimo
                     Imprimir(turnoold);
+                    txtDni.Text="";
                     return;
                 }
 
@@ -205,11 +206,13 @@ namespace TickeadoraTurnos
 
 
                 //Imprimo 
+                txtDni.Text = "";
                 Imprimir(turn);
+                
 
             }
 
-
+            txtDni.Text = "";
         }
 
         private void Imprimir(Turns turn)
@@ -227,84 +230,25 @@ namespace TickeadoraTurnos
                 ticket.HeaderImage = bmp;
             }
 
-            ticket.AddHeaderLine("──────────────────────────────────");
-            ticket.AddHeaderLine  ("TURNO: " + turn.Turno);                      
-            ticket.AddHeaderLine("──────────────────────────────────");
-            ticket.AddContentLine("");
-            ticket.AddContentLine("");
-            ticket.AddContentLine("DNI: " + turn.People.Dni);
-            ticket.AddContentLine("Nombre: " + turn.People.Nombre);
-            ticket.AddContentLine("Apellido: " + turn.People.Apellido);
-            ticket.AddContentLine("Fecha: " + DateTime.Now.ToShortDateString());
-            ticket.AddContentLine("");
-            ticket.AddContentLine("");
-            ticket.AddContentLine("");
-            if (!String.IsNullOrEmpty (strAnteultimaLinea))
+
+            if (!String.IsNullOrEmpty(strAnteultimaLinea))
                 ticket.AddFooterLine(strAnteultimaLinea);
             if (!String.IsNullOrEmpty(strUltimaLinea))
                 ticket.AddFooterLine(strUltimaLinea);
 
-            //ticket.AddFooterLine("Dirección de Transito");
-            //ticket.AddFooterLine("Municipalidad de Florencio Varela");
 
-            //if (!string.IsNullOrEmpty(objDatosImpresion.StrComercio))
-            //    ticket.AddHeaderLine(objDatosImpresion.StrComercio);//Nombre del comercio
-
-            //if (!string.IsNullOrEmpty(objDatosImpresion.StrDireccion) || !string.IsNullOrEmpty(objDatosImpresion.StrProvincia) || !string.IsNullOrEmpty(objDatosImpresion.StrLocalidad))
-            //    ticket.AddHeaderLine("EXPEDIDO EN:");
-
-            //if (!string.IsNullOrEmpty(objDatosImpresion.StrDireccion))
-            //    ticket.AddHeaderLine(objDatosImpresion.StrDireccion);//Direccion
-
-            //if (!string.IsNullOrEmpty(objDatosImpresion.StrProvincia) && !string.IsNullOrEmpty(objDatosImpresion.StrProvincia))
-            //    ticket.AddHeaderLine(objDatosImpresion.StrProvincia + ", " + objDatosImpresion.StrLocalidad);//Provincia, Localidad
-            //else if (string.IsNullOrEmpty(objDatosImpresion.StrProvincia) && !string.IsNullOrEmpty(objDatosImpresion.StrProvincia))
-            //    ticket.AddHeaderLine(objDatosImpresion.StrLocalidad);//Provincia, Localidad
-            //else if (!string.IsNullOrEmpty(objDatosImpresion.StrProvincia) && string.IsNullOrEmpty(objDatosImpresion.StrProvincia))
-            //    ticket.AddHeaderLine(objDatosImpresion.StrProvincia);//Provincia, Localidad
-
-            //if (!string.IsNullOrEmpty(objDatosImpresion.StrCodigoInterno))
-            //    ticket.AddHeaderLine(objDatosImpresion.StrCodigoInterno);//Codigo Interno
-
-            ////El metodo AddSubHeaderLine es lo mismo al de AddHeaderLine con la diferencia
-            ////de que al final de cada linea agrega una linea punteada "=========="
-            ////ticket.AddSubHeaderLine("Presupuesto # " + objVentas.IntCodigo);//Numero de caja y ticket
-            ////ticket.AddSubHeaderLine("CAJA: " + Convert.ToString(objConfiguracion.IntNumeroCaja));//CAJA
-            ////ticket.AddSubHeaderLine("Ha sido atendido por: " + cboVendedor.Text);//Empleado que lo atendio
-            //ticket.AddSubHeaderLine(DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
-
-            ////El metodo AddItem requeire 3 parametros, el primero es cantidad, el segundo es la descripcion
-            ////del producto y el tercero es el precio
-            ////ticket.AddItem("1", "Articulo Prueba", "15.00");
-
-            ////foreach (var c in objVentas.ListArticulosPorVenta)
-            ////{
-            ////    ticket.AddItem(Convert.ToString(c.IntCantidad), c.ObjArticulo.StrDescripcion, Convert.ToString(Redondeo(c.DoTotalConEfectivo)));
-            ////}
-
-            //////El metodo AddTotal requiere 2 parametros, la descripcion del total, y el precio
-            ////ticket.AddTotal("SUBTOTAL: ", Convert.ToString(objVentas.DoNeto));
-            ////ticket.AddTotal("DESCUENTO: ", Convert.ToString(objVentas.DoDescuento));
-            ////ticket.AddTotal("TOTAL: ", Convert.ToString(objVentas.DoTotal));
-            ////ticket.AddTotal("", ""); //Ponemos un total en blanco que sirve de espacio
-            ////ticket.AddTotal("PAGO: ", Convert.ToString(objVentas.DoPago));
-            ////ticket.AddTotal("DEBE: ", Convert.ToString(objVentas.DoDebe));
-            ////ticket.AddTotal("", ""); //Ponemos un total en blanco que sirve de espacio
-            ////ticket.AddTotal("RECIBIDO", "50.00");
-            ////ticket.AddTotal("CAMBIO", "15.00");
-            //ticket.AddTotal("", "");//Ponemos un total en blanco que sirve de espacio
-            ////ticket.AddTotal("USTED AHORRO", "0.00");
-
-            ////El metodo AddFooterLine funciona igual que la cabecera
-            //ticket.AddFooterLine(objDatosImpresion.StrComentarioLinea1);
-            //ticket.AddFooterLine(objDatosImpresion.StrComentarioLinea2);
-            //ticket.AddFooterLine(objDatosImpresion.StrComertarioLinea3);
-
-            ////Y por ultimo llamamos al metodo PrintTicket para imprimir el ticket, este metodo necesita un
-            ////parametro de tipo string que debe de ser el nombre de la impresora.
-
-
-            ////ticket.PrintTicket(objDatosImpresion.StrImpresora);
+            ticket.AddContentLine("");
+            ticket.AddContentLine("");
+            ticket.AddContentLine("Vecino: " + turn.People.Apellido + ", " + turn.People.Nombre);
+            ticket.AddContentLine("Fecha de Turno: " + turn.CallCenterTurns?.FechaTurno.ToString("dd/MM/yyyy"));
+            ticket.AddContentLine("Hora de Turno: " + turn.CallCenterTurns?.FechaTurno.ToString("HH:mm") + "hs") ;
+            ticket.AddContentLine("");
+            ticket.AddContentLine("");
+            ticket.AddTurnoLine("──────────────────────────────────");
+            ticket.AddTurnoLine("");
+            ticket.AddTurnoLine("TURNO: " + turn.Turno);
+            ticket.AddTurnoLine("");
+            ticket.AddTurnoLine("──────────────────────────────────");
             ticket.PrintTicket(strImpresora);
         }
 

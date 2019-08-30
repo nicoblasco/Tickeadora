@@ -9,6 +9,7 @@ namespace TickeadoraTurnos
     {
         ArrayList headerLines = new ArrayList();
         ArrayList contentLines = new ArrayList();
+        ArrayList turno = new ArrayList();
         ArrayList subHeaderLines = new ArrayList();
         ArrayList items = new ArrayList();
         ArrayList totales = new ArrayList();
@@ -18,6 +19,8 @@ namespace TickeadoraTurnos
         int count = 0;
 
         int maxChar = 35;
+        int maxCharEncabezado = 45;
+        int maxCharTurno = 20;
         int maxCharDescription = 20;
 
         int imageHeight = 0;
@@ -25,7 +28,8 @@ namespace TickeadoraTurnos
         float leftMargin = 0;
         float topMargin = 3;
 
-        string fontName = "Lucida Console";
+        // string fontName = "Lucida Console";
+        string fontName = "Courier"; 
         int fontSize = 12;
 
         Font printFont = null;
@@ -74,6 +78,11 @@ namespace TickeadoraTurnos
         public void AddContentLine(string line)
         {
             contentLines.Add(line);
+        }
+
+        public void AddTurnoLine(string line)
+        {
+            turno.Add(line);
         }
 
         public void AddSubHeaderLine(string line)
@@ -140,12 +149,16 @@ namespace TickeadoraTurnos
             gfx = e.Graphics;
 
             DrawImage();
-            DrawHeader();
-            DrawContent();
-            DrawSubHeader();
-         //   DrawItems();
-            //DrawTotales();
+            //  DrawSubHeader();
             DrawFooter();
+            DrawContent();
+            //  DrawHeader();
+            DrawTurno();
+
+
+         //   DrawItems();
+         //DrawTotales();
+
 
             if (headerImage != null)
             {
@@ -158,6 +171,12 @@ namespace TickeadoraTurnos
         {
             return topMargin + (count * printFont.GetHeight(gfx) + imageHeight);
         }
+
+        private float YPositionTurno()
+        {
+            return topMargin + ((count * 4) + imageHeight);
+        }
+
 
         private void DrawImage()
         {
@@ -206,7 +225,7 @@ namespace TickeadoraTurnos
                     count++;
                 }
             }
-            DrawEspacio();
+          //  DrawEspacio();
         }
 
         private void DrawContent()
@@ -214,37 +233,85 @@ namespace TickeadoraTurnos
             printFont = new Font(fontName, 10, FontStyle.Regular);
             foreach (string header in contentLines)
             {
+                //if (header.Length > maxChar)
+                //{
+                //    int currentChar = 0;
+                //    int headerLenght = header.Length;
+
+                //    //while (headerLenght > maxChar)
+                //    //{
+                //    //    line = header.Substring(currentChar, maxChar);
+                //    //    gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                //    //    count++;
+                //    //    currentChar += maxChar;
+                //    //    headerLenght -= maxChar;
+                //    //}
+                //    //line = header;
+
+                //    line = header.Substring(0, maxChar);
+
+                //    gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                //    count++;
+                //}
+                //else
+                //{
                 if (header.Length > maxChar)
-                {
-                    int currentChar = 0;
-                    int headerLenght = header.Length;
-
-                    while (headerLenght > maxChar)
-                    {
-                        line = header.Substring(currentChar, maxChar);
-                        gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
-
-                        count++;
-                        currentChar += maxChar;
-                        headerLenght -= maxChar;
-                    }
-                    line = header;
-                    gfx.DrawString(line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
-                    count++;
-                }
+                    line = header.Substring(0, maxChar);
                 else
-                {
                     line = header;
-                    gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
 
                     count++;
-                }
+                //}
             }
-            DrawEspacio();
+          //  DrawEspacio();
+        }
+
+
+
+
+        private void DrawTurno()
+        {
+            printFont = new Font(fontName, 20, FontStyle.Bold);
+            foreach (string header in turno)
+            {
+                //if (header.Length > maxChar)
+                //{
+                //    int currentChar = 0;
+                //    int headerLenght = header.Length;
+
+                //    while (headerLenght > maxChar)
+                //    {
+                //        line = header.Substring(currentChar, maxChar);
+                //        gfx.DrawString(line, printFont, myBrush, leftMargin, YPositionTurno(), new StringFormat());
+
+                //        count++;
+                //        currentChar += maxChar;
+                //        headerLenght -= maxChar;
+                //    }
+                //    line = header;
+                //    gfx.DrawString(line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                //    count++;
+                //}
+                //else
+                //{
+                if (header.Length> maxCharTurno)
+                    line = header.Substring(0, maxCharTurno);
+                else
+                    line = header;
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPositionTurno(), new StringFormat());
+
+                    count++;
+                //}
+            }
+            //  DrawEspacio();
         }
 
         private void DrawSubHeader()
         {
+            printFont = new Font(fontName, 8, FontStyle.Regular);
             foreach (string subHeader in subHeaderLines)
             {
                 if (subHeader.Length > maxChar)
@@ -280,7 +347,7 @@ namespace TickeadoraTurnos
                     count++;
                 }
             }
-            DrawEspacio();
+        //    DrawEspacio();
         }
 
         private void DrawItems()
@@ -369,34 +436,38 @@ namespace TickeadoraTurnos
             printFont = new Font(fontName, 8, FontStyle.Regular);
             foreach (string footer in footerLines)
             {
-                if (footer.Length > maxChar)
-                {
-                    int currentChar = 0;
-                    int footerLenght = footer.Length;
+                //if (footer.Length > maxCharEncabezado)
+                //{
+                //    int currentChar = 0;
+                //    int footerLenght = footer.Length;
 
-                    while (footerLenght > maxChar)
-                    {
-                        line = footer;
-                        gfx.DrawString(line.Substring(currentChar, maxChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                //    //while (footerLenght > maxCharEncabezado)
+                //    //{
+                //    //    line = footer;
+                //    //    gfx.DrawString(line.Substring(currentChar, maxCharEncabezado), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
 
-                        count++;
-                        currentChar += maxChar;
-                        footerLenght -= maxChar;
-                    }
-                    line = footer;
-                    gfx.DrawString(line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
-                    count++;
-                }
+                //    //    count++;
+                //    //    currentChar += maxCharEncabezado;
+                //    //    footerLenght -= maxCharEncabezado;
+                //    //}
+
+                //    line = footer.Substring(0, maxCharEncabezado);
+                //    gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                //    count++;
+                //}
+                //else
+                //{
+                if (footer.Length > maxCharEncabezado)
+                    line = footer.Substring(0, maxCharEncabezado);
                 else
-                {
-                    line = footer;
-                    gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                    line = footer; ;
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
 
                     count++;
-                }
+                //}
             }
             leftMargin = 0;
-            DrawEspacio();
+         //   DrawEspacio();
         }
 
         private void DrawEspacio()
