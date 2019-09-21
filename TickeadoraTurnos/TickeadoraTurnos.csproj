@@ -115,6 +115,9 @@
     <Compile Include="Models\Modules.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Nighborhoods.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\People.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

@@ -54,27 +54,67 @@ namespace TickeadoraTurnos
             //Variables
             string strMsgNoTieneTurno = "INEXISTENTE - No existe turno para el dia de hoy";
             string strMsgTurnoVencido = "TURNO VENCIDO - Su Turno a pasado el tiempo maximo de espera";
-            string strDNI = txtDni.Text.Trim();  
-            
+            string strDNI = txtDni.Text.Trim();
+            CallCenterTurns callCenterTurn;
             int? NumeroSecuencia;
             DateTime startDateTime = DateTime.Today; //Today at 00:00:00
             DateTime endDateTime = DateTime.Today.AddDays(1).AddTicks(-1); //Today at 23:59:59
+            DateTime startDateTimeAux = DateTime.Today;
             int EstadoInicial = db.Status.Where(x => x.Orden == 1).Select(x => x.Id).FirstOrDefault();
+            bool boTurnoVencido = false;
 
             //Con el DNI me fijo si existe la persona
             //Verifico con los datos que vienen del CallCenter
             List<Settings> setting = db.Settings.ToList();
             
-            CallCenterTurns callCenterTurn = db.CallCenterTurns.Where(x => x.DNI == strDNI && x.FechaTurno >= startDateTime && x.FechaTurno <= endDateTime).FirstOrDefault();
-            int? TiempoMaximoEspera = setting.Where(x => x.Clave == "TIEMPO_MAXIMO_ESPERA").FirstOrDefault().Numero1;
+            callCenterTurn = db.CallCenterTurns.Where(x => x.DNI == strDNI && x.FechaTurno >= startDateTime && x.FechaTurno <= endDateTime).FirstOrDefault();
+            int? TiempoMaximoEspera = setting.Where(x => x.Clave == "TIEMPO_MAXIMO_ESPERA").FirstOrDefault()?.Numero1;
+            int? DiasDeCorridoDeEspera = setting.Where(x => x.Clave == "DIAS_DE_CORRIDO_DE_ESPERA").FirstOrDefault()?.Numero1;
+            if (DiasDeCorridoDeEspera!=null)
+                 startDateTimeAux = DateTime.Today.AddDays(-1*(DiasDeCorridoDeEspera.Value));
 
             if (callCenterTurn == null)
             {
                 //No tiene turno
-                MessageBox.Show(strMsgNoTieneTurno);
+                //Puede ser que se le haya asignada turno en dias anteriores
+                    //Pregunto si desea que se le de turno igual
+
+                if (DiasDeCorridoDeEspera!=null)
+                {
+                     callCenterTurn = db.CallCenterTurns.Where(x => x.DNI == strDNI && x.FechaTurno >= startDateTimeAux && x.FechaTurno <= endDateTime).FirstOrDefault();
+
+                    if (callCenterTurn == null)
+                    {
+                        MessageBox.Show(strMsgNoTieneTurno);
+                    }
+                    else
+                    {
+                        string strMensajeVencido = "El Vecino tenía turno para el dia: " + callCenterTurn.FechaTurno.ToLongDateString() + ". ¿Desea imprimir el turno de todas formas?";
+                        DialogResult dialogResult = MessageBox.Show(strMensajeVencido, "Turno Vencido", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.No)
+                        {
+                            boTurnoVencido = true;
+                            MessageBox.Show(strMsgTurnoVencido);
+                        }
+                        //else if (dialogResult == DialogResult.No)
+                        //{
+                            
+                        //}
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show(strMsgNoTieneTurno);
+                }
+
+
+                
 
             }
-            else
+
+            //No utilizo el else porque puede ser cargue callCenterTurn en el medio
+            if (callCenterTurn != null && boTurnoVencido==false)
 
             {
                 //si esta asignado vuelvo a emitir el mismo turno
@@ -97,8 +137,16 @@ namespace TickeadoraTurnos
                         DateTime fechaMax = callCenterTurn.FechaTurno.AddMinutes(TiempoMaximoEspera.Value);
                         if (DateTime.Now > fechaMax)
                         {
-                            //Se le paso el turno
-                            MessageBox.Show(strMsgTurnoVencido);
+                            string strMensajeVencido = "El Vecino tenía turno para la hora: " + callCenterTurn.FechaTurno.ToShortTimeString() + ". ¿Desea imprimir el turno de todas formas?";
+                            DialogResult dialogResult = MessageBox.Show(strMensajeVencido, "Turno Vencido", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.No)
+                            {
+                                //Se le paso el turno
+                                MessageBox.Show(strMsgTurnoVencido);
+                                txtDni.Text = "";
+                                return;
+                            }
+
                         }
                     }
                 }

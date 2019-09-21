@@ -50,5 +50,6 @@ namespace TickeadoraTurnos.Models
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Windows> Windows { get; set; }
         public virtual DbSet<Workflows> Workflows { get; set; }
+        public virtual DbSet<Nighborhoods> Nighborhoods { get; set; }
     }
 }

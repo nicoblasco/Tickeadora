@@ -37,6 +37,7 @@ namespace TickeadoraTurnos.Models
         public Nullable<int> CountryId { get; set; }
         public string CalleNro { get; set; }
         public string Email { get; set; }
+        public Nullable<int> NighborhoodId { get; set; }
     
         public virtual Countries Countries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,5 +47,6 @@ namespace TickeadoraTurnos.Models
         public virtual Streets Streets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turns> Turns { get; set; }
+        public virtual Nighborhoods Nighborhoods { get; set; }
     }
 }

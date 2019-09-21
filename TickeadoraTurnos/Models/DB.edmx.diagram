@@ -59,6 +59,8 @@
         <AssociationConnector Association="TransitoModel.FK_dbo_Turns_dbo_TypesLicenses_TypesLicenseID" ManuallyRouted="false" />
         <AssociationConnector Association="TransitoModel.FK_dbo_Workflows_dbo_TypesLicenses_TypesLicenseID" ManuallyRouted="false" />
         <AssociationConnector Association="TransitoModel.LicenseLicenseClasses" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TransitoModel.Nighborhoods" Width="1.5" PointX="13.375" PointY="5" />
+        <AssociationConnector Association="TransitoModel.FK_dbo_People_dbo_Nighborhoods_NighborhoodId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

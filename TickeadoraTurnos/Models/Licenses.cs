@@ -30,6 +30,7 @@ namespace TickeadoraTurnos.Models
         public Nullable<System.DateTime> FechaRetiro { get; set; }
         public string Firma { get; set; }
         public Nullable<int> TurnId { get; set; }
+        public string NroRegistro { get; set; }
     
         public virtual People People { get; set; }
         public virtual Turns Turns { get; set; }
